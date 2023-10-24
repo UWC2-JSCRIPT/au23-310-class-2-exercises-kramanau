@@ -40,17 +40,30 @@ for (i = 0; i < board.length; i++){
 // Hints:
 // - Use rubular to check a few emails: https://rubular.com/
 // - Use regexp test method https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test
+const regexp = new RegExp('[a-z0-9!#$]+@[a-z0-9!#$]+\.[a-z0-9]+');
+const test1 = 'google@google.com';
+const test2 = 'example.com';
+const test3 = 'myemail@gmail.com';
+const test4 = 'abc@b.';
 
+console.log('Testing 1: ', regexp.test(test1));
+console.log('Testing 2: ', regexp.test(test2));
+console.log('Testing 3: ', regexp.test(test3));
+console.log('Testing 4: ', regexp.test(test4));
 
 // 7. You are given an assignmentDate as a string in the format "month/day/year"
 // i.e. '1/21/2019' - but this could be any date.
 // Convert this string to a Date
 const assignmentDate = '1/21/2019';
-
+const [month, day, year] = assignmentDate.split('/');
+const newDate = new Date(year, month -1, day);
+console.log('Date variable: ', newDate);
 
 // 8. Create a new Date instance to represent the dueDate.  
 // This will be exactly 7 days after the assignment date.
-
+const dueDate = new Date(newDate);
+dueDate.setDate(dueDate.getDate() + 7);
+console.log('Due Date variable: ', dueDate);
 
 // 9. Use dueDate values to create an HTML time tag in format
 // <time datetime="YYYY-MM-DD">Month day, year</time>
@@ -70,5 +83,8 @@ const months = [
   'December'
 ];
 
+const timeTag = `<time datetime="${dueDate.getFullYear()}-${String(dueDate.getMonth()+1).padStart(2, '0')}-${String(dueDate.getDate()).padStart(2,'0')}">${months[dueDate.getMonth()]} ${dueDate.getDate()}, ${dueDate.getFullYear()}</time>`
+
 
 // 10. log this value using console.log
+console.log('Time Tag: ', timeTag);
